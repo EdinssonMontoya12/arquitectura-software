@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sidebar Bootstrap 5</title>
+    <style>
+        body {
+            padding-top: 56px;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./cambios.html">Cambios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <p class="d-inline-flex gap-1 mt-3">
+            <a style="text-decoration: none; color: black;" data-bs-toggle="collapse" href="#collapse1" role="button"
+                aria-expanded="false" aria-controls="collapse1">
+                <b>1. REDIRECCIONAMIENTO DE NUBE POR SOBRECARGA</b>
+            </a>
+        </p>
+
+        <div class="collapse" id="collapse1">
+            <div class="accordion" id="accordion1">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+                            <b>Contexto</b>
+                        </button>
+                    </h2>
+                    <div id="collapse11" class="accordion-collapse collapse show" data-bs-parent="#accordion1">
+                        <div class="accordion-body">
+                            <p>En el momento que una nube deje de funcionar de la manera adecuada o no pueda soportar la
+                                cantidad de peticiones realizadas por lo usuarios, la carga debe ser redirigida a la
+                                segunda
+                                nube pública que cuenta con la aplicación ya desplegada y réplicas de la base de datos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                            <b>Propuesta</b>
+                        </button>
+                    </h2>
+                    <div id="collapse12" class="accordion-collapse collapse" data-bs-parent="#accordion1">
+                        <div class="accordion-body">
+                            <p>Definir un servidor principal con el software de Nginx por el cual pasan todas las
+                                peticiones
+                                y de esta forma detectar cuando la nube principal está saturada o sufriendo fallas para
+                                redirigir todas las peticiones hacia la nube secundaria automáticamente, sin
+                                intervención
+                                humana y realizando el proceso de forma que el usuario no note la redirección.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                            <b>Deuda</b>
+                        </button>
+                    </h2>
+                    <div id="collapse13" class="accordion-collapse collapse" data-bs-parent="#accordion1">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Al centralizar el llamado de peticiones a un único servidor, si este llegase a
+                                    fallar
+                                    por cuestiones ajenas al equipo de desarrollo (el proveedor de nube está sufriendo
+                                    fallas), el servicio quedaría inactivo de forma indeterminada hasta montar un nuevo
+                                    servicio de redirección y redireccionar los DNS a la nueva IP.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p class="d-inline-flex gap-1 mt-3">
+            <a style="text-decoration: none; color: black;" data-bs-toggle="collapse" href="#collapse2" role="button"
+                aria-expanded="false" aria-controls="collapse2">
+                <b>2. USO DE CONTENEDORES PARA EL DESPLIEGUE DE APLICACIONES</b>
+            </a>
+        </p>
+
+        <div class="collapse" id="collapse2">
+            <div class="accordion" id="accordion2">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse21" aria-expanded="true" aria-controls="collapse21">
+                            <b>Contexto</b>
+                        </button>
+                    </h2>
+                    <div id="collapse21" class="accordion-collapse collapse show" data-bs-parent="#accordion2">
+                        <div class="accordion-body">
+                            <p>El código de la aplicación es ejecutado directamente en la nube con el servidor
+                                configurado para ejecutar ese código en específico.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                            <b>Propuesta</b>
+                        </button>
+                    </h2>
+                    <div id="collapse22" class="accordion-collapse collapse" data-bs-parent="#accordion2">
+                        <div class="accordion-body">
+                            <p>Cambiar el sistema de despliegue y ejecución en servidor de las aplicaciones, se
+                                recomienda usar contenedores basados en Docker, de esta forma podemos desplegar el
+                                código en diferentes nubes independiente de su configuración, siempre que logre ejecutar
+                                Docker el servicio se ejecutará de forma correcta sin necesidad de modificar el código
+                                fuente.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse23" aria-expanded="false" aria-controls="collapse23">
+                            <b>Deuda</b>
+                        </button>
+                    </h2>
+                    <div id="collapse23" class="accordion-collapse collapse" data-bs-parent="#accordion2">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Se debe tener en cuenta qué tecnologías se usan dentro del código fuente debido a
+                                    que algunas son compatibles únicamente con el entorno de Windows y los contenedores
+                                    por defecto ejecutan internamente un ambiente Linux.</li>
+                                <li>Se hace necesario usar un repositorio de imágenes (Docker Hub, Kubernet, GitHub
+                                    Actions).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p class="d-inline-flex gap-1 mt-3">
+            <a style="text-decoration: none; color: black;" data-bs-toggle="collapse" href="#collapse3" role="button"
+                aria-expanded="false" aria-controls="collapse3">
+                <b>3. SEPARACIÓN DE SERVIDORES CÓDIGO Y BASE DE DATOS</b>
+            </a>
+        </p>
+
+        <div class="collapse" id="collapse3">
+            <div class="accordion" id="accordion3">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse31" aria-expanded="true" aria-controls="collapse31">
+                            <b>Contexto</b>
+                        </button>
+                    </h2>
+                    <div id="collapse31" class="accordion-collapse collapse show" data-bs-parent="#accordion3">
+                        <div class="accordion-body">
+                            <p>La nube almacena y ejecuta internamente tanto el servidor del código como el servidor de
+                                la base de datos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse32" aria-expanded="false" aria-controls="collapse32">
+                            <b>Propuesta</b>
+                        </button>
+                    </h2>
+                    <div id="collapse32" class="accordion-collapse collapse" data-bs-parent="#accordion3">
+                        <div class="accordion-body">
+                            <p>Creación de un nuevo servidor para realizar la separación del código y la base de datos
+                                de esta forma se distribuye la carga entre dos nubes distintas para dos procesos
+                                distintos con distintos procesos, se elimina la dependencia que tiene el código de
+                                alojarse en la misma nube que la base de datos, además de que se pueden crear nubes
+                                especializadas para la ejecución de los diferentes servicios aumentando así su
+                                rendimiento y reduciendo el riesgo de caídas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse33" aria-expanded="false" aria-controls="collapse33">
+                            <b>Deuda</b>
+                        </button>
+                    </h2>
+                    <div id="collapse33" class="accordion-collapse collapse" data-bs-parent="#accordion3">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Al tener una nueva nube se debe contar con personal más capacitado para
+                                    administrarlas de forma correcta.</li>
+                                <li>Si tanto la nube de base de datos principal como la réplica fallan el servicio no
+                                    estaría disponible hasta levantar una instancia de la base de datos.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p class="d-inline-flex gap-1 mt-3">
+            <a style="text-decoration: none; color: black;" data-bs-toggle="collapse" href="#collapse4" role="button"
+                aria-expanded="false" aria-controls="collapse3">
+                <b>4. RÉPLICAS DE LA BASE DE DATOS</b>
+            </a>
+        </p>
+
+        <div class="collapse" id="collapse4">
+            <div class="accordion" id="accordion4">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse41" aria-expanded="true" aria-controls="collapse41">
+                            <b>Contexto</b>
+                        </button>
+                    </h2>
+                    <div id="collapse41" class="accordion-collapse collapse show" data-bs-parent="#accordion4">
+                        <div class="accordion-body">
+                            <p>Se requiere que la información sea precisa y esté en sincronía entre la nube principal y
+                                la de respaldo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse42" aria-expanded="false" aria-controls="collapse42">
+                            <b>Propuesta</b>
+                        </button>
+                    </h2>
+                    <div id="collapse42" class="accordion-collapse collapse" data-bs-parent="#accordion4">
+                        <div class="accordion-body">
+                            <p>Se crea un nuevo servidor de base de datos que estará esperando el momento de ser usado,
+                                esta nueva instancia se estará sincronizado en tiempo real con el servidor principal con
+                                el fin de ofrecer al los usuario información actualizada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse43" aria-expanded="false" aria-controls="collapse43">
+                            <b>Deuda</b>
+                        </button>
+                    </h2>
+                    <div id="collapse43" class="accordion-collapse collapse" data-bs-parent="#accordion4">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>La latencia de actualización de datos de la base de datos réplica puede aumentar la
+                                    latencia hasta 3 min dependiendo de la cantidad de información y la complejidad de
+                                    los procesos.</li>
+                                <li>Algunas versiones de MySql tienen bugs que pueden inducir el lag dentro de la base
+                                    de datos principal, la versión 8.0.33 aumenta de forma gradual el consumo de ram de
+                                    la base de datos principal cuando la réplica está habilitada.
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p class="d-inline-flex gap-1 mt-3">
+            <a style="text-decoration: none; color: black;" data-bs-toggle="collapse" href="#collapse5" role="button"
+                aria-expanded="false" aria-controls="collapse3">
+                <b>5. AMAZON S3 COMO ALMACENAMIENTO EN BLOQUE</b>
+            </a>
+        </p>
+
+        <div class="collapse" id="collapse5">
+            <div class="accordion" id="accordion5">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse51" aria-expanded="true" aria-controls="collapse51">
+                            <b>Contexto</b>
+                        </button>
+                    </h2>
+                    <div id="collapse51" class="accordion-collapse collapse show" data-bs-parent="#accordion5">
+                        <div class="accordion-body">
+                            <p>Se hace necesario que el sistema de almacenamiento por bloques esté sincronizado entre
+                                ambas nubes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse52" aria-expanded="false" aria-controls="collapse52">
+                            <b>Propuesta</b>
+                        </button>
+                    </h2>
+                    <div id="collapse52" class="accordion-collapse collapse" data-bs-parent="#accordion5">
+                        <div class="accordion-body">
+                            <p>Se consume el servicio Amazon S3 para el sistema de almacenamiento por bloques, esto
+                                protegerá el almacenamiento de datos evitando su pérdida sin previa autorización o por
+                                fallas humanas y permitirá gran cantidad de peticiones ya sean para cargar o descargar
+                                ficheros sin colapsar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse53" aria-expanded="false" aria-controls="collapse53">
+                            <b>Deuda</b>
+                        </button>
+                    </h2>
+                    <div id="collapse53" class="accordion-collapse collapse" data-bs-parent="#accordion5">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>El volumen de datos aumentará de forma gradual en el tiempo lo que obligará a
+                                    mejorar o reorganizar el sistema como se está estructurando el almacén de ficheros.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

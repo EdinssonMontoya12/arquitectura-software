@@ -1,0 +1,27 @@
+body {
+    font-family: sans-serif;
+  }
+  
+  .navbar {
+    background-color: #007bff;
+  }
+  
+  .navbar-brand {
+    color: white;
+  }
+  
+  .navbar-toggler {
+    border-color: #007bff;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #007bff;
+  }
+  
+  .container {
+    margin-top: 40px;
+  }
+  
+  .col-md-8 {
+    padding-right: 20px;
+  }
